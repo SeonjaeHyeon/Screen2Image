@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<html>
+  <head>
+     <meta charset="utf-8">
+     <style>
+      body {
+        width:260px;
+      }
+     </style>
+  </head>
+  <body>
+    <!--
+      Can't use inline script because it violates Chrome's Content Security Policy: https://stackoverflow.com/questions/17601615/the-chrome-extension-popup-is-not-working-click-events-are-not-handled
+    -->
+    <img id="img1" style="cursor:pointer" src="camera.png" title="Screen Capture" alt="camera" width="70px"; height="70px" border="1">
+    <img id="img2" style="cursor:pointer" src="gallery.png" title="Get all images" alt="gallery" width="70px"; height="70px" border="1">
+
+    <script src="main.js"></script>
+
+    <h1>Screen2Image</h1>
+    <div>
+      <p>화면 캡쳐 확장프로그램 입니다.</p>
+      <p style="color:blue">* 현재 전체 화면 캡쳐 및 페이지의 모든 이미지를 저장하는 기능을 지원합니다.</p><br>
+      <p><b>by Seonjae Hyeon</b></p>
+    </div>
+  </body>
+</html>
