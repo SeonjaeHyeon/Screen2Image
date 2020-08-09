@@ -11,6 +11,11 @@ More information will be added soon.
 > Python 3.7.6 on Anaconda 4.8.3 (x64)  
 > Sublime Text 3.2.2 (x64)  
 
+## Icon Images From..
+https://www.flaticon.com/kr/authors/freepik  
+https://www.flaticon.com/kr/authors/becris  
+
+
 ## License
 
 GNU General Public License v3.0
