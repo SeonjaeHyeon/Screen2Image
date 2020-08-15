@@ -45,6 +45,7 @@ function getImage() {
     var newTable = document.createElement('table');
     newTable.setAttribute('id', 'table1');
     newTable.setAttribute('border', '1');
+    newTable.setAttribute('bordercolor', '#ddd'); // https://aboooks.tistory.com/77
     newTable.setAttribute('frame', 'void'); // table's outer line: https://blog.naver.com/ryopho/130172800002
     // newTable.setAttribute('rules', 'all'); // table's inner line: https://blog.naver.com/ryopho/130172889946
     document.getElementById('div1').appendChild(newTable);
