@@ -11,6 +11,9 @@ function downloadImage(imgUrl) {
 function insertImage(urls) {
     var index = 0;
 
+    // Remove duplicates: https://medium.com/@Dongmin_Jang/javascript-array-%EC%A4%91%EB%B3%B5-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-es6-b5b9075361f9
+    urls = Array.from(new Set(urls));
+
     for(var i = 0; i < urls.length; i++) {
         if (urls[i] == '') {
             continue;
