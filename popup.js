@@ -12,37 +12,28 @@ function insertImage(urls) {
     var index = 0;
 
     for(var i = 0; i < urls.length; i++) {
-        /*
-        var newDiv = document.createElement('div');
-        newDiv.setAttribute('id', 'frame' + i)
-        newDiv.setAttribute('width', '120px');
-        newDiv.setAttribute('height', 'auto');
-        document.getElementById('div1').appendChild(newDiv);
-
-        var newImg = document.createElement('img');
-        newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'max-width: 120px; height: auto;')
-        newImg.setAttribute('onclick', 'javascript:downloadImage(' + urls[i] + ')');
-        document.getElementById('frame' + i).appendChild(newImg);
-        */
-
         if (urls[i] == '') {
             continue;
         }
 
+        if (index % 2 == 0) {
+            var newTr = document.createElement('tr');
+            document.getElementById('table1').appendChild(newTr);
+        }
+
+        var newTd = document.createElement('td');
+        newTd.setAttribute('style', 'width: 120px; height: 120px;');
+
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'max-width: 120px; height: auto; cursor: pointer;')
-        // newImg.setAttribute('onclick', 'javascript:downloadImage(' + urls[i] + ')');
-        document.getElementById('div1').appendChild(newImg);
+        newImg.setAttribute('style', 'max-width: 120px; height: auto; cursor: pointer;'); // cusor pointer: https://live8.tistory.com/175
+        
+        newTd.innerHTML = newImg.outerHTML;
+        newTr.innerHTML += newTd.outerHTML;
+
         document.getElementById('img' + index).onclick = function() {
             downloadImage(this.getAttribute('src')); // About 'this': https://www.zerocho.com/category/JavaScript/post/5b0645cc7e3e36001bf676eb
-        }
-
-
-        if(index % 2 == 0) {
-            document.getElementById('div1').appendChild(document.createElement('p'));
         }
 
         index++;
@@ -51,6 +42,13 @@ function insertImage(urls) {
 
 function getImage() {
     document.getElementById('div1').innerHTML = "";
+    var newTable = document.createElement('table');
+    newTable.setAttribute('id', 'table1');
+    newTable.setAttribute('border', '1');
+    newTable.setAttribute('frame', 'void'); // table's outer line: https://blog.naver.com/ryopho/130172800002
+    // newTable.setAttribute('rules', 'all'); // table's inner line: https://blog.naver.com/ryopho/130172889946
+    document.getElementById('div1').appendChild(newTable);
+
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { text: "get_image" }, insertImage);
