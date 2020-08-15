@@ -22,14 +22,20 @@ function insertImage(urls) {
         }
 
         var newTd = document.createElement('td');
-        newTd.setAttribute('style', 'width: 120px; height: 120px;');
+        newTd.setAttribute('style', 'width: 120px; height: 141px;');
+
+        var newInput = document.createElement('input');
+        newInput.setAttribute('type', 'text');
+        newInput.setAttribute('style', 'width: 120px'); // newInput.setAttribute('width', '120px') is not working: https://stackoverflow.com/a/6699659
+        newInput.setAttribute('value', urls[i]);
+        newInput.setAttribute('readonly', '');
 
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
         newImg.setAttribute('style', 'max-width: 120px; height: auto; cursor: pointer;'); // cusor pointer: https://live8.tistory.com/175
         
-        newTd.innerHTML = newImg.outerHTML;
+        newTd.innerHTML = newInput.outerHTML + newImg.outerHTML;
         newTr.innerHTML += newTd.outerHTML;
 
         document.getElementById('img' + index).onclick = function() {
