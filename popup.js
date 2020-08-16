@@ -64,7 +64,7 @@ function insertImage(urls) {
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'max-width: 123px; height: auto;'); 
+        newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto;'); 
         
         newTd.innerHTML = newImg.outerHTML;
         newTr.innerHTML += newTd.outerHTML;
