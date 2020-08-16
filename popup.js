@@ -20,30 +20,54 @@ function insertImage(urls) {
         }
 
         if (index % 2 == 0) {
+            var newTrInfo = document.createElement('tr');
+            document.getElementById('table1').appendChild(newTrInfo);
+        }
+
+        var newTdInfo = document.createElement('td');
+        newTdInfo.setAttribute('style', 'width: 123px; height: 21px');
+
+        var newInputInfo = document.createElement('input');
+        newInputInfo.setAttribute('type', 'text');
+        newInputInfo.setAttribute('style', 'width: 95px'); // newInput.setAttribute('width', '120px') is not working: https://stackoverflow.com/a/6699659
+        newInputInfo.setAttribute('value', urls[i]);
+        newInputInfo.setAttribute('readonly', '');
+        newInputInfo.onclick = function() {
+            this.select(); // https://stackoverflow.com/questions/4067469/selecting-all-text-in-html-text-input-when-clicked
+        }
+
+        var newImgInfo = document.createElement('img');
+        newImgInfo.setAttribute('src', 'download.png');
+        newImgInfo.setAttribute('style', 'width: 15px; height: 15px; cursor: pointer;'); // cusor pointer: https://live8.tistory.com/175
+        newImgInfo.setAttribute('data-url', urls[i]);
+        newImgInfo.onclick = function() {
+            downloadImage(this.getAttribute('data-url')); // About 'this': https://www.zerocho.com/category/JavaScript/post/5b0645cc7e3e36001bf676eb
+        }
+
+        // newTdInfo.innerHTML = newInputInfo.outerHTML + ' ' + newImgInfo.outerHTML;
+        //newTrInfo.innerHTML += newTdInfo.outerHTML;
+
+        newTdInfo.appendChild(newInputInfo); // https://stackoverflow.com/questions/54615835/javascript-createelement-and-append-child-node
+        //newTdInfo.appendChild(document.createTextNode(' ')); // https://stackoverflow.com/questions/54615835/javascript-createelement-and-append-child-node
+        newTdInfo.append(' '); // https://wrkbr.tistory.com/563
+        newTdInfo.appendChild(newImgInfo);
+        newTrInfo.appendChild(newTdInfo);
+
+        if (index % 2 == 0) {
             var newTr = document.createElement('tr');
             document.getElementById('table1').appendChild(newTr);
         }
 
         var newTd = document.createElement('td');
-        newTd.setAttribute('style', 'width: 120px; height: 141px;');
-
-        var newInput = document.createElement('input');
-        newInput.setAttribute('type', 'text');
-        newInput.setAttribute('style', 'width: 120px'); // newInput.setAttribute('width', '120px') is not working: https://stackoverflow.com/a/6699659
-        newInput.setAttribute('value', urls[i]);
-        newInput.setAttribute('readonly', '');
+        newTd.setAttribute('style', 'width: 123px; height: 120px;');
 
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'max-width: 120px; height: auto; cursor: pointer;'); // cusor pointer: https://live8.tistory.com/175
+        newImg.setAttribute('style', 'max-width: 123px; height: auto;'); 
         
-        newTd.innerHTML = newInput.outerHTML + newImg.outerHTML;
+        newTd.innerHTML = newImg.outerHTML;
         newTr.innerHTML += newTd.outerHTML;
-
-        document.getElementById('img' + index).onclick = function() {
-            downloadImage(this.getAttribute('src')); // About 'this': https://www.zerocho.com/category/JavaScript/post/5b0645cc7e3e36001bf676eb
-        }
 
         index++;
     }
