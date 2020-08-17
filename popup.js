@@ -95,6 +95,25 @@ function insertImage(urls) {
 
 function getImage() {
     document.getElementById('div1').innerHTML = "";
+
+    var newButton = document.createElement('button');
+    newButton.setAttribute('type', 'button');
+    newButton.innerText = 'Download All';
+    newButton.onclick = function() {
+        var bImages = document.getElementsByTagName('table')[0].getElementsByTagName('img');
+
+        for(var i = 0; i < bImages.length; i++) {
+            if (bImages[i].hasAttribute('id')) { // hasAttribute: https://www.jkun.net/532
+                downloadImage(bImages[i].getAttribute('src'));
+            }
+        }
+    }
+    document.getElementById('div1').appendChild(newButton);
+
+    var newP = document.createElement('p');
+    newP.setAttribute('style', 'margin-top: -8px;');
+    document.getElementById('div1').appendChild(newP);
+
     var newTable = document.createElement('table');
     newTable.setAttribute('id', 'table1');
     newTable.setAttribute('border', '1');
