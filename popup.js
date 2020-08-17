@@ -44,11 +44,7 @@ function insertImage(urls) {
             downloadImage(this.getAttribute('data-url')); // About 'this': https://www.zerocho.com/category/JavaScript/post/5b0645cc7e3e36001bf676eb
         }
 
-        // newTdInfo.innerHTML = newInputInfo.outerHTML + ' ' + newImgInfo.outerHTML;
-        //newTrInfo.innerHTML += newTdInfo.outerHTML;
-
         newTdInfo.appendChild(newInputInfo); // https://stackoverflow.com/questions/54615835/javascript-createelement-and-append-child-node
-        //newTdInfo.appendChild(document.createTextNode(' ')); // https://stackoverflow.com/questions/54615835/javascript-createelement-and-append-child-node
         newTdInfo.append(' '); // https://wrkbr.tistory.com/563
         newTdInfo.appendChild(newImgInfo);
         newTrInfo.appendChild(newTdInfo);
@@ -64,10 +60,18 @@ function insertImage(urls) {
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto;'); 
+        newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto;');
+        newImg.setAttribute('title', 'Open image in a new tab.');
+        newImg.onclick = function() {
+            // Open url in a new tab: https://stackoverflow.com/a/11384018
+            var win = window.open(this.getAttribute('src'), '_blank');
+            win.focus();
+        }
         
-        newTd.innerHTML = newImg.outerHTML;
-        newTr.innerHTML += newTd.outerHTML;
+        // newTd.innerHTML = newImg.outerHTML;
+        // newTr.innerHTML += newTd.outerHTML;
+        newTd.appendChild(newImg);
+        newTr.appendChild(newTd);
 
         index++;
     }
@@ -80,7 +84,6 @@ function getImage() {
     newTable.setAttribute('border', '1');
     newTable.setAttribute('bordercolor', '#ddd'); // https://aboooks.tistory.com/77
     newTable.setAttribute('frame', 'void'); // table's outer line: https://blog.naver.com/ryopho/130172800002
-    // newTable.setAttribute('rules', 'all'); // table's inner line: https://blog.naver.com/ryopho/130172889946
     document.getElementById('div1').appendChild(newTable);
 
 
