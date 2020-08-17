@@ -8,6 +8,18 @@ function downloadImage(imgUrl) {
     chrome.downloads.download({url: imgUrl});
 }
 
+function getImageSize(src, tag) { 
+    // Get original size of image
+    // https://sheerheart.tistory.com/entry/JavaScript-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9D%B4%EC%A6%88-%EA%B5%AC%ED%95%98%EA%B8%B0
+    var img = new Image();
+
+    img.onload = function() {
+        tag.innerText = this.width + 'x' + this.height;
+    }
+
+    img.src = src;
+}
+
 function insertImage(urls) {
     var index = 0;
 
@@ -55,22 +67,26 @@ function insertImage(urls) {
         }
 
         var newTd = document.createElement('td');
-        newTd.setAttribute('style', 'width: 123px; height: 120px;');
+        newTd.setAttribute('style', 'width: 123px; height: 141px;');
 
         var newImg = document.createElement('img');
         newImg.setAttribute('id', 'img' + index);
         newImg.setAttribute('src', urls[i]);
-        newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto;');
+        newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto; cursor: pointer;');
         newImg.setAttribute('title', 'Open image in a new tab.');
         newImg.onclick = function() {
             // Open url in a new tab: https://stackoverflow.com/a/11384018
             var win = window.open(this.getAttribute('src'), '_blank');
             win.focus();
         }
-        
-        // newTd.innerHTML = newImg.outerHTML;
-        // newTr.innerHTML += newTd.outerHTML;
+
+        var newDiv = document.createElement('div');
+        newDiv.setAttribute('style', 'color: #808080; font-size: 13px; font-weight: bold;');
+
+        getImageSize(urls[i], newDiv);
+
         newTd.appendChild(newImg);
+        newTd.appendChild(newDiv);
         newTr.appendChild(newTd);
 
         index++;
