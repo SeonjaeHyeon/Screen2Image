@@ -139,7 +139,9 @@ function getImage() {
 
         for(var i = 0; i < bImages.length; i++) {
             if (bImages[i].hasAttribute('id')) { // hasAttribute: https://www.jkun.net/532
-                downloadImage(bImages[i].getAttribute('src'));
+                if (bImages[i].parentNode.style.display != 'none') {
+                    downloadImage(bImages[i].getAttribute('src'));
+                }
             }
         }
     }
