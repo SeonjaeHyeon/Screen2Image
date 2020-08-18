@@ -75,10 +75,6 @@ function insertImage(urls) {
         newImg.setAttribute('style', 'min-width: 35px; max-width: 123px; height: auto; cursor: pointer;');
         newImg.setAttribute('title', 'Open image in a new tab.');
         newImg.onclick = function() {
-            // Open url in a new tab: https://stackoverflow.com/a/11384018
-            //var win = window.open(this.getAttribute('src'), '_blank');
-            //win.focus();
-
             // Open url in a new tab: https://developer.chrome.com/extensions/tabs#method-create
             chrome.tabs.create({ url: this.getAttribute('src')});
         }
@@ -96,8 +92,44 @@ function insertImage(urls) {
     }
 }
 
+function filterImage(filter) {
+    var fTable = document.getElementById('table1');
+    var fTd = fTable.getElementsByTagName('td');
+
+    for(var i = 0; i < fTd.length; i++) {
+        fTd[i].style.display = ""; // display:none : https://unabated.tistory.com/entry/displaynone-%EA%B3%BC-visibilityhidden-%EC%9D%98-%EC%B0%A8%EC%9D%B4
+    }
+
+    for(var i = 0; i < fTd.length; i++) {
+        var fImg = fTd[i].getElementsByTagName('img')[0];
+
+        if (fImg.hasAttribute('id') && !fImg.getAttribute('src').includes(filter)) {
+            fTd[i].style.display = "none";
+        }
+        else if (fImg.hasAttribute('data-url') && !fImg.getAttribute('data-url').includes(filter)) {
+            fTd[i].style.display = "none";
+        }
+    }
+}
+
 function getImage() {
     document.getElementById('div1').innerHTML = "";
+
+    var newP = document.createElement('p');
+    newP.setAttribute('style', 'margin-top: -7px;');
+    var newP2 = document.createElement('p');
+    newP2.setAttribute('style', 'margin-top: -8px;');
+
+    var newInputFilter = document.createElement('input');
+    newInputFilter.setAttribute('type', 'text');
+    newInputFilter.setAttribute('id', 'filter_input');
+    newInputFilter.setAttribute('style', 'width: 250px;')
+    newInputFilter.setAttribute('placeholder', 'FILTER BY URL');
+    newInputFilter.oninput = function() { // oninput Event: https://www.w3schools.com/tags/ev_oninput.asp
+        filterImage(this.value); // this.getAttribute('value') is null
+    }
+    document.getElementById('div1').appendChild(newInputFilter);
+    document.getElementById('div1').appendChild(newP);
 
     var newButton = document.createElement('button');
     newButton.setAttribute('type', 'button');
@@ -112,10 +144,7 @@ function getImage() {
         }
     }
     document.getElementById('div1').appendChild(newButton);
-
-    var newP = document.createElement('p');
-    newP.setAttribute('style', 'margin-top: -8px;');
-    document.getElementById('div1').appendChild(newP);
+    document.getElementById('div1').appendChild(newP2);
 
     var newTable = document.createElement('table');
     newTable.setAttribute('id', 'table1');
