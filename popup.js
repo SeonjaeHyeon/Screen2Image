@@ -76,8 +76,11 @@ function insertImage(urls) {
         newImg.setAttribute('title', 'Open image in a new tab.');
         newImg.onclick = function() {
             // Open url in a new tab: https://stackoverflow.com/a/11384018
-            var win = window.open(this.getAttribute('src'), '_blank');
-            win.focus();
+            //var win = window.open(this.getAttribute('src'), '_blank');
+            //win.focus();
+
+            // Open url in a new tab: https://developer.chrome.com/extensions/tabs#method-create
+            chrome.tabs.create({ url: this.getAttribute('src')});
         }
 
         var newDiv = document.createElement('div');
