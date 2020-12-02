@@ -37,7 +37,11 @@ function loadImage() {
     var urls = new Array;
 
     for (var i = 0; i < images.length; i++) {
-        urls[i] = images[i].getAttribute('src')
+        var url = images[i].getAttribute('src');
+        if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
+            url = 'https://' + window.location.hostname + url;
+        }
+        urls[i] = url;
     }
     
     return urls;
