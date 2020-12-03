@@ -38,6 +38,10 @@ function loadImage() {
 
     for (var i = 0; i < images.length; i++) {
         var url = images[i].getAttribute('src');
+        if (url == null) {
+            continue;
+        }
+
         if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
             url = 'https://' + window.location.hostname + url;
         }
