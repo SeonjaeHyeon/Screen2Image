@@ -47,6 +47,23 @@ function loadImage() {
         }
         urls[i] = url;
     }
+
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+        images = iframes[i].contentDocument.getElementsByTagName('img');
+        for (var j = 0; j < images.length; j++) {
+            var url = images[j].getAttribute('src');
+            if (url == null) {
+                continue;
+            }
+
+            if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
+                url = 'https://' + window.location.hostname + url;
+            }
+
+            urls.push(url);
+        }
+    }
     
     return urls;
 }
