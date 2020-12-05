@@ -50,6 +50,10 @@ function loadImage() {
 
     var iframes = document.getElementsByTagName('iframe');
     for (var i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentDocument == null) {
+            continue;
+        }
+
         images = iframes[i].contentDocument.getElementsByTagName('img');
         for (var j = 0; j < images.length; j++) {
             var url = images[j].getAttribute('src');
