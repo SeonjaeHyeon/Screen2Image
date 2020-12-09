@@ -42,9 +42,6 @@ function loadImage() {
             continue;
         }
 
-        if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
-            url = 'https://' + window.location.hostname + url;
-        }
         urls[i] = url;
     }
 
@@ -61,12 +58,17 @@ function loadImage() {
                 continue;
             }
 
-            if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
-                url = 'https://' + window.location.hostname + url;
-            }
-
             urls.push(url);
         }
+    }
+
+    for(var i = 0; i < urls.length; i++) {
+        var url = urls[i];
+        if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
+            url = 'https://' + window.location.hostname + url;
+        }
+
+        urls[i] = url;
     }
     
     return urls;
