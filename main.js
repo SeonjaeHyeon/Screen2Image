@@ -3,16 +3,10 @@ Code from here: https://minaminaworld.tistory.com/89
 */
 
 function bodyShot() {
-    //전체 스크린 샷하기
     html2canvas(document.body)
-    //document에서 body 부분을 스크린샷을 함.
     .then(
         function (canvas) {
 
-        //appendchild 부분을 주석을 풀게 되면 body
-        //document.body.appendChild(canvas);
-
-        //특별부록 파일 저장하기 위한 부분.
         saveAs(canvas.toDataURL(), 'file-name.png');
         }).catch(function (err) {
             console.log(err);
