@@ -6,8 +6,9 @@ function bodyShot() {
     html2canvas(document.body)
     .then(
         function (canvas) {
+            var fname = 'screenshot-' + window.location.hostname + '-' + document.title + '.png';
 
-        saveAs(canvas.toDataURL(), 'file-name.png');
+            saveAs(canvas.toDataURL(), fname);
         }).catch(function (err) {
             console.log(err);
         });
