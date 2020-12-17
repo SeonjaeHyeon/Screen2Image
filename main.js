@@ -37,7 +37,7 @@ function loadImage() {
             continue;
         }
 
-        urls[i] = url;
+        urls[i] = toAbsolute(url);
     }
 
     var iframes = document.getElementsByTagName('iframe');
@@ -53,20 +53,18 @@ function loadImage() {
                 continue;
             }
 
-            urls.push(url);
+            urls.push(toAbsolute(url));
         }
     }
 
-    for(var i = 0; i < urls.length; i++) {
-        var url = urls[i];
-        if (url.indexOf('https://') != 0 && url.indexOf('http://') != 0 && url.indexOf('/') == 0) {
-            url = 'https://' + window.location.hostname + url;
-        }
-
-        urls[i] = url;
-    }
-    
     return urls;
+}
+
+// https://stackoverflow.com/a/14781678
+function toAbsolute(url) {
+    var link = document.createElement("a");
+    link.href = url;
+    return link.href;
 }
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
