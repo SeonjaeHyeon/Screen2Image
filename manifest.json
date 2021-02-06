@@ -7,7 +7,7 @@
 
   "content_scripts": [
     {
-      "js" : ["html2canvas.js", "main.js"],
+      "js" : ["html2canvas.min.js", "main.js"],
       "matches" : ["<all_urls>"]
     }
   ],
